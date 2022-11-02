@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Xml.Linq;
 
-namespace DanmarksRadio
+namespace DanmarksRadio.Models
 {
     public class MusicRecords
     {
@@ -10,7 +10,7 @@ namespace DanmarksRadio
         public int Duration { get; set; }
         public int PublicationYear { get; set; }
         public int Id { get; set; }
-      
+
 
 
         public override string ToString()
@@ -21,7 +21,7 @@ namespace DanmarksRadio
 
         public void TitleValidator()
         {
-            if(Title == null || Title == "" )
+            if (Title == null || Title == "")
             {
                 throw new ArgumentNullException("Title is null");
             }
@@ -34,7 +34,7 @@ namespace DanmarksRadio
 
         public void ArtistValidator()
         {
-            if (Artist == null|| Artist == "")
+            if (Artist == null || Artist == "")
             {
                 throw new ArgumentNullException("Artist is null");
             }
@@ -46,7 +46,7 @@ namespace DanmarksRadio
 
         public void DurationValidator()
         {
-            if (Duration < 10 || Duration >300)
+            if (Duration < 10 || Duration > 300)
             {
                 throw new Exception("Duration must be from 10 seconds to 5 minutes(300sec) long ");
             }
@@ -54,7 +54,7 @@ namespace DanmarksRadio
 
         public void PublicationYearValidator()
         {
-            if(PublicationYear<1900 || PublicationYear> 2022)
+            if (PublicationYear < 1900 || PublicationYear > 2022)
             {
                 throw new Exception("Publication year must be between 1900 and 2022");
             }
@@ -71,7 +71,7 @@ namespace DanmarksRadio
 
     }
 
-   
+
 
 
 

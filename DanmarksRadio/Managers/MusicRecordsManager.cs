@@ -1,4 +1,6 @@
-﻿namespace DanmarksRadio
+﻿using DanmarksRadio.Models;
+
+namespace DanmarksRadio.Managers
 {
     public class MusicRecordsManager
     {
@@ -18,12 +20,10 @@
         public List<MusicRecords> GetAllRecords()
         {
             return new List<MusicRecords>(Data);
-
-            
         }
 
         public List<MusicRecords> GetAll(string title = null, string artist = null)
-       
+
         {
             List<MusicRecords> records = new List<MusicRecords>(Data);
             // copy constructor
@@ -45,7 +45,7 @@
             return Data.Find(records => records.Id == id);
         }
 
-        
+
 
         public MusicRecords Add(MusicRecords newRecord)
         {

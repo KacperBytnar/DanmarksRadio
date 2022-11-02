@@ -1,26 +1,34 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DanmarksRadio.Managers;
+using DanmarksRadio.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DanmarksRadio.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("Records")]
     [ApiController]
     public class MusicRecordsController : ControllerBase
     {
 
-        private readonly MusicRecordsManager _manager = new MusicRecordsManager();
+        private readonly IMusicRecordsManager _manager;
+
+        public MusicRecordsController(MusicRecordsContext context)
+        {
+            _manager = new MusicRecordsManagerDB(context);
+        }
 
 
         [HttpGet]
         public IEnumerable<MusicRecords> GetRecords()
-        {
-            return _manager.GetAllRecords();
+        {   
+            return _manager.GetAll();
         }
 
-
-
-        
-
+        [HttpPost]
+        public MusicRecords Post([FromBody] MusicRecords value)
+        {
+            return _manager.Add(value);
+        }
 
     }
 }

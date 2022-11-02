@@ -1,3 +1,7 @@
+using DanmarksRadio;
+using Microsoft.EntityFrameworkCore;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -20,6 +24,7 @@ builder.Services.AddCors(options =>
                               });
 });
 
+builder.Services.AddDbContext<MusicRecordsContext>(opt => opt.UseSqlServer(Secrets.ConnectionString));
 
 var app = builder.Build();
 
