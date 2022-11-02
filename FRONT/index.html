@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- https://www.bootstrapcdn.com/ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Music Recordss</title>
+</head>
+
+<body>
+    <h1>Music Records</h1>
+    <div id="app">
+        {{message}}
+        <hr>
+        <h2>Get All tracks</h2>
+        <button id="getAllButton" v-on:click="getAllRecords()" class="btn btn-primary">Get all tracks</button>
+        <br/>
+        <input v-model="artistToGetBy" placeholder="artist" type="text" />
+        <button v-on:click="getByArtist(artistToGetBy)" class="btn btn-primary">Get by artist</button>
+
+        <ul id="trackslist" v-if="musicRecords.length">
+            <li v-for="record in musicRecords">
+                {{record.id}} {{record.title}} {{record.duration}} {{record.artist}}
+            </li>
+        </ul>
+        <div v-else>No tracks!</div>
+
+        <h2>Add (POST)</h2>
+        <input v-model="addData.id" placeholder="id" type="number" />
+        <input v-model="addData.title" placeholder="title" type="text" />
+        <input v-model="addData.duration" placeholder="duration" type="number" />
+        <input v-model.number="addData.artist" placeholder="artist" type="text" />
+        <button v-on:click="addCar()" class="btn btn-success">Add</button>
+        <div>{{addMessage}}</div>
+
+    </div>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

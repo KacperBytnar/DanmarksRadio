@@ -2,10 +2,13 @@
 using DanmarksRadio.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
+
 
 namespace DanmarksRadio.Controllers
 {
     [Route("Records")]
+    [EnableCors("AllowAll")]
     [ApiController]
     public class MusicRecordsController : ControllerBase
     {
@@ -17,17 +20,33 @@ namespace DanmarksRadio.Controllers
             _manager = new MusicRecordsManagerDB(context);
         }
 
-
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpGet]
         public IEnumerable<MusicRecords> GetRecords()
         {   
             return _manager.GetAll();
         }
 
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
-        public MusicRecords Post([FromBody] MusicRecords value)
+        public ActionResult<MusicRecords> Post([FromBody] MusicRecords value)
         {
-            return _manager.Add(value);
+            try
+            {
+                MusicRecords createdRecord = _manager.Add(value);
+
+                return Created("/" + createdRecord.Id, createdRecord);
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
     }
