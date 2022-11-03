@@ -23,9 +23,9 @@ namespace DanmarksRadio.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpGet]
-        public IEnumerable<MusicRecords> GetRecords()
+        public IEnumerable<MusicRecords> GetRecords([FromQuery] string? title)
         {   
-            return _manager.GetAll();
+            return _manager.GetAll(title);
         }
 
         [ProducesResponseType(StatusCodes.Status201Created)]

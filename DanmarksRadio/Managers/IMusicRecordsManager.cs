@@ -4,7 +4,7 @@ namespace DanmarksRadio.Managers
 {
     public interface IMusicRecordsManager
     {
-        IEnumerable<MusicRecords> GetAll();
+        IEnumerable<MusicRecords> GetAll(string? title);
 
         MusicRecords Add(MusicRecords newRecord);
     }

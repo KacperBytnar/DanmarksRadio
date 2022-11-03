@@ -1,5 +1,6 @@
 ﻿using DanmarksRadio.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace DanmarksRadio.Managers
 {
@@ -11,9 +12,17 @@ namespace DanmarksRadio.Managers
             _musicRecordsContext = context;
         }
 
-        public IEnumerable<MusicRecords> GetAll()
+        public IEnumerable<MusicRecords> GetAll(string? title = null)
         {
-            return _musicRecordsContext.MusicRecords.ToList();
+            List<MusicRecords> books = _musicRecordsContext.MusicRecords.ToList();
+            // copy constructor
+            // Callers should no get a reference to the Data object, but rather get a copy
+
+            if (title != null)
+            {
+                books = books.FindAll(book => book.Artist != null && book.Artist.StartsWith(title));
+            }
+            return books;
         }
 
         public MusicRecords Add(MusicRecords newRecord)

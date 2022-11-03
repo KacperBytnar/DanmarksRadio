@@ -26,8 +26,8 @@ Vue.createApp({
             this.helperGetAndShow(url)
         },
         getByArtist(artist) {
-            const url = baseUrl + "?vendor=" + artist
-            this.helperGetAndShow(url)
+            const uurl = "http://localhost:5256/Records?title=" + artist 
+            this.helperGetAndShow(uurl)
         },
         async helperGetAndShow(url) { // helper metode: getAllCar + getByVendor are very similar
             try {
